@@ -39,7 +39,10 @@ module.exports = function (grunt) {
                 script: 'server.js',
                 options: {
                     ext: 'js,jsx',
-                    ignore: ['node_modules/**', 'public/scripts.js']
+                    ignore: ['node_modules/**', 'public/scripts.js'],
+                    env: {
+                        DEBUG: ''
+                    }
                 }
             }
         },
