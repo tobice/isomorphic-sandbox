@@ -19,9 +19,8 @@ module.exports = React.createClass({
             <div classNames="posts">
                 <h1>Posts</h1>
                 {posts.map(function(post) {
-                    var params = { id: post.id };
                     return <div className="post" key={post.id}>
-                        <h2><NavLink name="post" navParams={params} context={this.props.context}>{post.title}</NavLink></h2>
+                        <h2><NavLink name="post" navParams={{ id: post.id }} context={this.props.context}>{post.title}</NavLink></h2>
                         <p>{post.body}</p>
                     </div>
                 }.bind(this))}
