@@ -3,31 +3,35 @@ var EventEmitter = require('events').EventEmitter;
 var debug = require('debug')('Example:PageStore');
 
 function PageStore(dispatcher) {
-    this.currentRoute = null;
+    this.route = null;
+    this.view = '';
     this.data = {};
 }
 
 PageStore.storeName = 'PageStore';
 PageStore.handlers = {
-    'CHANGE_ROUTE_START': 'handleNavigate',
-    'UPDATE_PAGE_DATA': 'handleUpdatePageData'
+    'UPDATE_PAGE_DATA': 'handleUpdatePageData',
+    'UPDATE_PAGE': 'handleUpdatePage'
 };
 
 util.inherits(PageStore, EventEmitter);
-
-PageStore.prototype.handleNavigate = function (route) {
-    this.currentRoute = route;
-    this.emit('change');
-};
 
 PageStore.prototype.handleUpdatePageData = function (data) {
     this.data = data;
     this.emit('change');
 };
 
+PageStore.prototype.handleUpdatePage = function (payload) {
+    this.route = payload.route;
+    this.view = payload.view;
+    this.data = payload.data;
+    this.emit('change');
+};
+
 PageStore.prototype.getState = function () {
     return {
-        route: this.currentRoute,
+        route: this.route,
+        view: this.view,
         data: this.data
     };
 };
@@ -37,7 +41,8 @@ PageStore.prototype.dehydrate = function () {
 };
 
 PageStore.prototype.rehydrate = function (state) {
-    this.currentRoute = state.route;
+    this.route = state.route;
+    this.view = state.view;
     this.data = state.data;
 };
 

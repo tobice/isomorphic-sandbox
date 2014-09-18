@@ -9,7 +9,8 @@ var Context = require('./lib/Context'),
     Application = require('./views/Page.jsx'),
     debug = require('debug'),
     bootstrapDebug = debug('Example'),
-    routes = require('./config/routes');
+    routes = require('./config/routes'),
+    controller = require('./config/controller');
 
 Context.registerStore(PostStore);
 Context.registerStore(PageStore);
@@ -21,7 +22,7 @@ function App(options) {
     debug('Creating context');
     this.context = new Context({
         fetcher: fetcher,
-        routes: routes
+        routes: controller.getRoutes()
     });
     if (initialState) {
         bootstrapDebug('rehydrating context');

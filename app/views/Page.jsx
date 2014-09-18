@@ -47,7 +47,7 @@ var Page = React.createClass({
                     </li>
                 </ul>
                 <div>
-                    {views[this.state.route.config.view]({ context: this.props.context, data: this.state.data })}
+                    {views[this.state.view]({ context: this.props.context, data: this.state.data })}
                 </div>
             </div>
         );
