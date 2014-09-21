@@ -6,6 +6,7 @@
 
 var React = require('react');
 var NavLink = require('flux-router-component').NavLink;
+var Navigation = require('./Navigation.jsx');
 var RouterMixin = require('flux-router-component').RouterMixin;
 var views = require('./views.js');
 
@@ -35,19 +36,11 @@ var Page = React.createClass({
     render: function () {
         return (
             <div>
-                <ul>
-                    <li>
-                        <NavLink name="home" context={this.props.context}>Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink name="about" context={this.props.context}>About</NavLink>
-                    </li>
-                    <li>
-                        <NavLink name="posts" context={this.props.context}>Posts</NavLink>
-                    </li>
-                </ul>
-                <div>
-                    {views[this.state.view]({ context: this.props.context, data: this.state.data })}
+                <Navigation context={this.props.context} />
+                <div className="container">
+                    <div className="row">
+                        {views[this.state.view]({context: this.props.context, data: this.state.data})}
+                    </div>
                 </div>
             </div>
         );

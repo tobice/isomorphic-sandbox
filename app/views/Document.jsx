@@ -6,13 +6,16 @@
 
 var React = require('react');
 
-var Home = React.createClass({
+var Document = React.createClass({
 
     render: function () {
         return (
-            <div>Home Component</div>
+            <div>
+                <h1>{this.props.data.title}</h1>
+                <div>{this.props.data.content}</div>
+            </div>
         );
     }
 });
 
-module.exports = Home;
+module.exports = Document;

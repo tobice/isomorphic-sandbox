@@ -3,12 +3,18 @@ var Controller = require('../lib/Controller');
 var controller = new Controller({
 
     home: function () {
+        this.view = 'document';
+        this.data = {
+            title: 'Isomorphic Sandbox',
+            content: 'Home content. Hello'
+        };
         this.done();
     },
 
     about: function () {
+        this.view = 'document';
         this.data = {
-            title: 'This is title',
+            title: 'About',
             content: 'About content'
         };
         this.done();
