@@ -24,3 +24,4 @@ node_modules
 
 public/scripts.js
 public/styles.css
+.sass-cache

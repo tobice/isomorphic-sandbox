@@ -22,14 +22,13 @@ module.exports = function (grunt) {
             },
         },
 
-        stylus: {
-            main: {
+        less: {
+            development: {
                 options: {
-                    paths: ['assets/stylesheets'],
-                    'include css': true
+                    paths: ['node_modules', 'node_modules/bootstrap/less']
                 },
                 files: {
-                    'public/styles.css': 'assets/stylesheets/index.styl'
+                    'public/styles.css': 'assets/stylesheets/index.less'
                 }
             }
         },
@@ -57,7 +56,7 @@ module.exports = function (grunt) {
             },
             styles: {
                 files: 'assets/stylesheets/**/*',
-                tasks: ['stylus'],
+                tasks: ['less'],
                 options: {
                     interrupt: true
                 }
@@ -76,12 +75,12 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-browserify');
-    grunt.loadNpmTasks('grunt-contrib-stylus');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-concurrent');
 
-    grunt.registerTask('compile', ['browserify', 'stylus']);
+    grunt.registerTask('compile', ['browserify', 'less']);
     grunt.registerTask('default', ['compile']);
     grunt.registerTask('server', ['compile', 'concurrent']);
 };
