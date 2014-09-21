@@ -1,4 +1,9 @@
 var Controller = require('../lib/Controller');
+var loremIpsum = require('lorem-ipsum');
+
+String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
 
 var controller = new Controller({
 
@@ -6,16 +11,21 @@ var controller = new Controller({
         this.view = 'document';
         this.data = {
             title: 'Isomorphic Sandbox',
-            content: 'Home content. Hello'
+            content: 'Welcome on this simple isomorphic page!'
         };
         this.done();
     },
 
-    about: function () {
+    document: function (title) {
         this.view = 'document';
         this.data = {
-            title: 'About',
-            content: 'About content'
+            title: title.capitalize(),
+            content: loremIpsum({
+                count: 2,
+                units: 'paragraphs',
+                paragraphLowerBound: 3,
+                format: 'html'
+            })
         };
         this.done();
     },

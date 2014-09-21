@@ -12,7 +12,7 @@ var Document = React.createClass({
         return (
             <div>
                 <h1>{this.props.data.title}</h1>
-                <div>{this.props.data.content}</div>
+                <div dangerouslySetInnerHTML={{__html: this.props.data.content}} />
             </div>
         );
     }
