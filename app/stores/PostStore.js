@@ -7,39 +7,47 @@ var debug = require('debug')('Example:PostStore');
 function PostStore(dispatcher) {
     this.dispatcher = dispatcher;
     this.posts = {};
+    this.loaded = false;
 }
 
 PostStore.storeName = 'PostStore';
 PostStore.handlers = {
-    'RECEIVE_POSTS': 'receivePosts'
+    'RECEIVE_POSTS': 'receivePosts',
+    'UPDATE_PAGE': 'clear'
 };
 
 util.inherits(PostStore, BaseStore);
 
 PostStore.prototype.receivePosts = function (posts) {
-    var self = this;
-    posts.forEach(function (post) {
-        self.posts[post.id] = post;
-    });
-    self.emitChange();
+    this.posts = posts;
+    this.loaded = true;
+    this.emitChange();
 };
 
 PostStore.prototype.getAll = function () {
     return this.posts;
 };
 
-PostStore.prototype.get = function (id) {
-    return this.posts[id];
+PostStore.prototype.isLoaded = function () {
+    return this.loaded;
+};
+
+PostStore.prototype.clear = function () {
+    this.posts = [];
+    this.loaded = false;
+    this.emitChange();
 };
 
 PostStore.prototype.dehydrate = function () {
     return {
         posts: this.posts,
+        loaded: this.loaded
     };
 };
 
 PostStore.prototype.rehydrate = function (state) {
     this.posts = state.posts;
+    this.loaded = state.loaded;
 };
 
 module.exports = PostStore;

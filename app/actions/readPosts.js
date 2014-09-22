@@ -4,11 +4,12 @@
  */
 'use strict';
 
-var debug = require('debug')('Example:readPostsAction');
-var PostStore = require('../stores/PostStore');
-
 module.exports = function (context, payload, done) {
-    context.fetcher.read('post', {}, {}, function (err, posts) {
+
+    // Payload may contain fetcher parameters
+    var params = payload;
+
+    context.fetcher.read('post', params, {}, function (err, posts) {
         context.dispatch('RECEIVE_POSTS', posts);
         done();
     });

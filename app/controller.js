@@ -8,18 +8,20 @@ String.prototype.capitalize = function () {
 var controller = new Controller({
 
     home: function () {
-        this.view = 'document';
+        this.view = 'page';
         this.data = {
+            page: 'home',
             title: 'Isomorphic Sandbox',
             content: 'Welcome on this simple isomorphic page!'
         };
         this.done();
     },
 
-    document: function (title) {
-        this.view = 'document';
+    page: function (page) {
+        this.view = 'page';
         this.data = {
-            title: title.capitalize(),
+            page: page,
+            title: page.capitalize(),
             content: loremIpsum({
                 count: 2,
                 units: 'paragraphs',
@@ -28,20 +30,6 @@ var controller = new Controller({
             })
         };
         this.done();
-    },
-
-    posts: function () {
-        this.fetcher.read('post', {}, {}, function (err, posts) {
-            this.data.posts = posts;
-            this.done();
-        }.bind(this));
-    },
-
-    post: function (id) {
-        this.fetcher.read('post', {id: id}, {}, function (err, post) {
-            this.data = post;
-            this.done();
-        }.bind(this));
     }
 });
 

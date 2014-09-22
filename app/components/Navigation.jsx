@@ -25,16 +25,13 @@ var Navigation = React.createClass({
                     <div className="navbar-collapse collapse" id="navbar-main">
                         <ul className="nav navbar-nav">
                             <li>
-                                <NavLink name="document" navParams={{title: "strategy"}} context={this.props.context}>Strategy</NavLink>
+                                <NavLink name="page" navParams={{page: "strategy"}} context={this.props.context}>Strategy</NavLink>
                             </li>
                             <li>
-                                <NavLink name="document" navParams={{title: "about"}} context={this.props.context}>About</NavLink>
+                                <NavLink name="page" navParams={{page: "about"}} context={this.props.context}>About</NavLink>
                             </li>
                             <li>
-                                <NavLink name="posts" context={this.props.context}>Posts</NavLink>
-                            </li>
-                            <li>
-                                <NavLink name="document" navParams={{title: "contact"}} context={this.props.context}>Contact</NavLink>
+                                <NavLink name="page" navParams={{page: "contact"}} context={this.props.context}>Contact</NavLink>
                             </li>
                         </ul>
                     </div>

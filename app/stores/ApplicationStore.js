@@ -1,34 +1,34 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
-var debug = require('debug')('Example:PageStore');
+var debug = require('debug')('Example:ApplicationStore');
 
-function PageStore(dispatcher) {
+function ApplicationStore(dispatcher) {
     this.route = null;
     this.view = '';
     this.data = {};
 }
 
-PageStore.storeName = 'PageStore';
-PageStore.handlers = {
+ApplicationStore.storeName = 'ApplicationStore';
+ApplicationStore.handlers = {
     'UPDATE_PAGE_DATA': 'handleUpdatePageData',
     'UPDATE_PAGE': 'handleUpdatePage'
 };
 
-util.inherits(PageStore, EventEmitter);
+util.inherits(ApplicationStore, EventEmitter);
 
-PageStore.prototype.handleUpdatePageData = function (data) {
+ApplicationStore.prototype.handleUpdatePageData = function (data) {
     this.data = data;
     this.emit('change');
 };
 
-PageStore.prototype.handleUpdatePage = function (payload) {
+ApplicationStore.prototype.handleUpdatePage = function (payload) {
     this.route = payload.route;
     this.view = payload.view;
     this.data = payload.data;
     this.emit('change');
 };
 
-PageStore.prototype.getState = function () {
+ApplicationStore.prototype.getState = function () {
     return {
         route: this.route,
         view: this.view,
@@ -36,14 +36,14 @@ PageStore.prototype.getState = function () {
     };
 };
 
-PageStore.prototype.dehydrate = function () {
+ApplicationStore.prototype.dehydrate = function () {
     return this.getState();
 };
 
-PageStore.prototype.rehydrate = function (state) {
+ApplicationStore.prototype.rehydrate = function (state) {
     this.route = state.route;
     this.view = state.view;
     this.data = state.data;
 };
 
-module.exports = PageStore;
+module.exports = ApplicationStore;

@@ -5,14 +5,14 @@
 'use strict';
 var Context = require('./lib/Context'),
     PostStore = require('./stores/PostStore'),
-    PageStore = require('./stores/PageStore'),
-    Application = require('./components/Page.jsx'),
+    ApplicationStore = require('./stores/ApplicationStore'),
+    Application = require('./components/Application.jsx'),
     debug = require('debug'),
     bootstrapDebug = debug('Example'),
     controller = require('./controller');
 
 Context.registerStore(PostStore);
-Context.registerStore(PageStore);
+Context.registerStore(ApplicationStore);
 
 function App(options) {
     options = options || {};

@@ -10,11 +10,11 @@ var Navigation = require('./Navigation.jsx');
 var RouterMixin = require('flux-router-component').RouterMixin;
 var views = require('../views.js');
 
-var Page = React.createClass({
+var Application = React.createClass({
     mixins: [RouterMixin],
 
     getInitialState: function () {
-        this.store = this.props.context.getStore('PageStore');
+        this.store = this.props.context.getStore('ApplicationStore');
         return this.store.getState();
     },
 
@@ -47,4 +47,4 @@ var Page = React.createClass({
     }
 });
 
-module.exports = Page;
+module.exports = Application;
