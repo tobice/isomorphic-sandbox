@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
 var NavLink = require('flux-router-component').NavLink;
-var readPosts = require('../actions/readPosts');
 
 module.exports = React.createClass({
 

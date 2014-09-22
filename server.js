@@ -10,15 +10,13 @@ var bodyParser = require('body-parser');
 var debug = require('debug')('Example');
 var React = require('react');
 var Application = require('./app/app');
-var Posts = require('./app/views/Posts.jsx');
-var readPosts = require('./app/actions/readPosts');
 var navigateAction = require('flux-router-component').navigateAction;
 var Fetcher = require('fetchr');
 
 var app = express();
 expressState.extend(app);
 app.set('state namespace', 'App');
-app.set('views', __dirname + '/app/views');
+app.set('views', __dirname + '/app'); // only for layout
 app.set('view engine', 'jade');
 
 app.use(express.static(__dirname + '/public'));

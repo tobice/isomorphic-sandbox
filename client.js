@@ -8,7 +8,7 @@ var React = require('react');
 var debug = require('debug');
 var bootstrapDebug = debug('Example');
 var Fetcher = require('fetchr');
-var Application = require('./app');
+var Application = require('./app/app.js');
 
 var fetcher = new Fetcher({
         xhrPath: Application.config.xhrPath

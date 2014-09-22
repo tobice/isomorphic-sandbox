@@ -8,7 +8,7 @@ var React = require('react');
 var NavLink = require('flux-router-component').NavLink;
 var Navigation = require('./Navigation.jsx');
 var RouterMixin = require('flux-router-component').RouterMixin;
-var views = require('./views.js');
+var views = require('../views.js');
 
 var Page = React.createClass({
     mixins: [RouterMixin],

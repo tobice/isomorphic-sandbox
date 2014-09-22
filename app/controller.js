@@ -1,4 +1,4 @@
-var Controller = require('../lib/Controller');
+var Controller = require('./lib/Controller');
 var loremIpsum = require('lorem-ipsum');
 
 String.prototype.capitalize = function () {

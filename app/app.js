@@ -6,11 +6,10 @@
 var Context = require('./lib/Context'),
     PostStore = require('./stores/PostStore'),
     PageStore = require('./stores/PageStore'),
-    Application = require('./views/Page.jsx'),
+    Application = require('./components/Page.jsx'),
     debug = require('debug'),
     bootstrapDebug = debug('Example'),
-    routes = require('./config/routes'),
-    controller = require('./config/controller');
+    controller = require('./controller');
 
 Context.registerStore(PostStore);
 Context.registerStore(PageStore);

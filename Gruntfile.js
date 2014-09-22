@@ -17,7 +17,7 @@ module.exports = function (grunt) {
                     ],
                 },
                 files: {
-                    'public/scripts.js': 'app/client.js',
+                    'public/scripts.js': 'client.js',
                 },
             },
         },
