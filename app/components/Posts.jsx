@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 var React = require('react');
-var ReactAsync = require('../lib/ReactAsync.js');
+var ReactFluxAsync = require('../lib/ReactFluxAsync.js');
 var NavLink = require('flux-router-component').NavLink;
 var actionReadPosts = require('../actions/readPosts');
 
 module.exports = React.createClass({
-    mixins: [ReactAsync.Mixin],
+    mixins: [ReactFluxAsync.Mixin],
 
     props: {
         context: React.PropTypes.object,
@@ -17,31 +17,24 @@ module.exports = React.createClass({
         this.PostStore = this.context.getStore('PostStore');
     },
 
-    getInitialStateAsync: function (done) {
-        this.init();
-
+    initStoresAsync: function (done) {
         if (!this.PostStore.isLoaded()) {
-            var payload = {page: this.props.page};
-            this.context.executeAction(actionReadPosts, payload, function () {
-                done(null, this.getStateFromStores());
-            }.bind(this));
-        }
-        else {
-            done(null, this.getStateFromStores());
+            this.loadStore(done);
+        } else {
+            done();
         }
     },
 
-    getStateFromStores: function () {
-        this.init();
+    loadStore: function (done) {
+        var payload = {page: this.props.page};
+        this.context.executeAction(actionReadPosts, payload, done);
+    },
 
+    getStateFromStores: function () {
         return {
             posts: this.PostStore.getAll(),
             loaded: this.PostStore.isLoaded()
         }
-    },
-
-    componentWillMount: function () {
-        this.init();
     },
 
     componentDidMount: function () {
