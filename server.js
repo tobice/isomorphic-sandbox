@@ -9,6 +9,7 @@ var expressState = require('express-state');
 var bodyParser = require('body-parser');
 var debug = require('debug')('Example');
 var React = require('react');
+var ReactAsync = require('react-async');
 var Application = require('./app/app');
 var navigateAction = require('flux-router-component').navigateAction;
 var Fetcher = require('fetchr');
@@ -45,20 +46,41 @@ app.use(function (req, res, next) {
             }
             return;
         }
-        debug('Rendering Page component');
-        var html = React.renderComponentToString(application.getComponent());
-        debug('Exposing context state');
-        res.expose(application.context.dehydrate(), 'Context');
-        debug('Rendering application into layout');
-        res.render('layout', {
-            html: html
-        }, function (err, markup) {
-            if (err) {
-                next(err);
+
+        /**
+         * Send generated markup.
+         * @param error
+         * @param {String} html
+         * @param {Object} data component's state. Standard React-async
+         *  approach is to inject the data as JSON into html markup. But
+         *  we use Flux stores for holding the state, so instead we inject
+         *  stores into markup.
+         */
+        var sendMarkup = function (error, html, data) {
+
+            if (error) {
+                console.log(error);
             }
-            debug('Sending markup');
-            res.send(markup);
-        });
+
+            debug('Exposing context state');
+            res.expose(application.context.dehydrate(), 'Context');
+
+            debug('Rendering application into layout');
+            res.render('layout', {
+                html: html
+            }, function (err, markup) {
+                if (err) {
+                    next(err);
+                }
+                debug('Sending markup');
+                res.send(markup);
+            });
+        };
+
+        debug('Rendering Page component');
+        ReactAsync.renderComponentToStringWithAsyncState(application.getComponent(), sendMarkup);
+        // var markup = React.renderComponentToString(application.getComponent());
+        // sendMarkup(null, markup, {});
     });
 });
 

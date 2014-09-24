@@ -32,3 +32,6 @@ bootstrapDebug('React Rendering');
 React.renderComponent(app, mountNode, function () {
     bootstrapDebug('React Rendered');
 });
+
+// var markup = React.renderComponentToString(app);
+// document.getElementById('app2').innerHTML = markup;

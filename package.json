@@ -22,6 +22,8 @@
         "reactify": "~0.4.0",
         "react": "~0.11.0",
         "react-tools": "~0.5.1",
+        "react-async": "~1.0.2",
+        "fibers": "~1.0.2",
         "node-jsx": "~0.11.0",
         "dispatchr": "^0.2.0",
         "fetchr": "^0.3.0",

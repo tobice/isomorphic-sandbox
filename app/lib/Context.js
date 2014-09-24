@@ -1,5 +1,6 @@
-var Dispatcher = require('dispatchr')(),
-    Router = require('routr');
+var Dispatcher = require('dispatchr')();
+var Router = require('routr');
+var _ = require('underscore');
 
 function Context(options) {
     options = options || {};
@@ -15,10 +16,14 @@ Context.registerStore = Dispatcher.registerStore.bind(Dispatcher);
 Context.prototype.getComponentContext = function () {
     var self = this;
     return {
-        executeAction: function (actionController, payload) {
-            actionController(self.actionContext, payload, function (err) {
+        executeAction: function (actionController, payload, done) {
+            actionController(self.actionContext, payload, function (err, data) {
                 if (err) {
                     console.error(err);
+                }
+
+                if (_.isFunction(done)) {
+                    done(err, data);
                 }
             });
         },
