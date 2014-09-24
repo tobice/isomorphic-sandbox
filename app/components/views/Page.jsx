@@ -19,7 +19,7 @@ var Page = React.createClass({
                 <hr />
                 <h3>Posts</h3>
 
-                <Posts context={this.props.context} page={this.props.data.page} key={"posts-" + this.props.data.page}/>
+                <Posts context={this.props.context} page={this.props.data.page} />
             </div>
         );
     }

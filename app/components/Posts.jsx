@@ -19,15 +19,10 @@ module.exports = React.createClass({
 
     initStoresAsync: function (done) {
         if (!this.PostStore.isLoaded()) {
-            this.loadStore(done);
+            this.context.executeAction(actionReadPosts, {page: this.props.page}, done);
         } else {
             done();
         }
-    },
-
-    loadStore: function (done) {
-        var payload = {page: this.props.page};
-        this.context.executeAction(actionReadPosts, payload, done);
     },
 
     getStateFromStores: function () {
@@ -35,6 +30,10 @@ module.exports = React.createClass({
             posts: this.PostStore.getAll(),
             loaded: this.PostStore.isLoaded()
         }
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        nextProps.context.executeAction(actionReadPosts, {page: nextProps.page});
     },
 
     componentDidMount: function () {
