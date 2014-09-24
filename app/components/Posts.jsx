@@ -66,9 +66,7 @@ module.exports = React.createClass({
                 {posts.map(function(post) {
                     return (
                         <div className="post well" key={post.id}>
-                            <h4>{post.title}
-                                <small> (by {post.author})</small>
-                            </h4>
+                            <h4>{post.title} <small> (by {post.author})</small> </h4>
                             <p>{post.body}</p>
                         </div> )
                 }.bind(this))}
