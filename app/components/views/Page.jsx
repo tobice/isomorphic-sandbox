@@ -7,7 +7,6 @@
 var React = require('react');
 var Posts = require('../Posts.jsx');
 
-
 var Page = React.createClass({
 
     render: function () {

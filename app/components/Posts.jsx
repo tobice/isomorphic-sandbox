@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var ReactFluxAsync = require('../lib/ReactFluxAsync.js');
 var NavLink = require('flux-router-component').NavLink;
 var actionReadPosts = require('../actions/readPosts');
@@ -52,7 +53,9 @@ module.exports = React.createClass({
 
         if (!this.state || !this.state.loaded) {
             return (
-                <p className="well"><i>Loading posts...</i></p>
+                <p className="well">
+                    <i className="fa fa-spinner fa-spin"></i> <i>Loading posts...</i>
+                </p>
             );
         }
 

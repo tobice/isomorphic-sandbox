@@ -33,6 +33,16 @@ module.exports = function (grunt) {
             }
         },
 
+        copy: {
+            main: {
+                files: [{
+                    expand: true,
+                    cwd: 'node_modules/font-awesome/fonts/',
+                    src: '**',
+                    dest: 'public/fonts/'}]
+            }
+        },
+
         nodemon: {
             all: {
                 script: 'server.js',
@@ -78,9 +88,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-concurrent');
 
-    grunt.registerTask('compile', ['browserify', 'less']);
+    grunt.registerTask('compile', ['browserify', 'less', 'copy']);
     grunt.registerTask('default', ['compile']);
     grunt.registerTask('server', ['compile', 'concurrent']);
 };

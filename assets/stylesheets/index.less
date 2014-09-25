@@ -1,7 +1,28 @@
+@fa-font-path: "fonts";
+
 @import "bootstrap";
 @import "bootswatch/flatly/variables";
 @import "bootswatch/flatly/bootswatch";
+@import "font-awesome/less/font-awesome";
 
 body {
   padding-top: 80px;
+}
+
+.fade-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+}
+
+.fade-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
 }
