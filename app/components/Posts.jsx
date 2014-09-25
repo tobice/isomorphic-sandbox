@@ -2,8 +2,10 @@
 var React = require('react');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var ReactFluxAsync = require('../lib/ReactFluxAsync.js');
-var NavLink = require('flux-router-component').NavLink;
 var actionReadPosts = require('../actions/readPosts');
+
+var NavLink = require('flux-router-component').NavLink;
+var PostForm = require('./PostForm.jsx');
 
 module.exports = React.createClass({
     mixins: [ReactFluxAsync.Mixin],
@@ -61,7 +63,12 @@ module.exports = React.createClass({
 
         var posts = this.state.posts;
         if (posts.length == 0) {
-            return ( <p className="well">No posts.</p> );
+            return (
+                <div>
+                    <p className="well">No posts.</p>
+                    <PostForm />
+                </div>
+            );
         }
 
         return (
@@ -73,6 +80,8 @@ module.exports = React.createClass({
                             <p>{post.body}</p>
                         </div> )
                 }.bind(this))}
+
+                <PostForm />
             </div> );
     }
 });
