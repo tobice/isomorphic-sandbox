@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var Bootstrap = require('react-bootstrap');
-var Input = Bootstrap.Input;
+var Input = require('./Input.jsx');
 
 /**
  * Horizontal Input. Automatically adds Bootstrap wrappers and labels around the

@@ -81,7 +81,7 @@ module.exports = React.createClass({
                         </div> )
                 }.bind(this))}
 
-                <PostForm />
+                <PostForm page={this.props.page} />
             </div> );
     }
 });
