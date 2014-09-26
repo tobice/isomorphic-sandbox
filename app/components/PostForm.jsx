@@ -9,7 +9,7 @@ var postScheme = require('../schemes/post');
 module.exports = React.createClass({
     mixins: [React.addons.LinkedStateMixin, FormValidationMixin],
     propTypes: {
-        page: React.PropTypes.string
+        page: React.PropTypes.string.isRequired
     },
 
     getInitialState: function () {

@@ -55,9 +55,11 @@ module.exports = React.createClass({
 
         if (!this.state || !this.state.loaded) {
             return (
-                <p className="well">
-                    <i className="fa fa-spinner fa-spin"></i> <i>Loading posts...</i>
-                </p>
+                <div>
+                    <p className="well">
+                        <i className="fa fa-spinner fa-spin"></i> <i>Loading posts...</i>
+                    </p>
+                </div>
             );
         }
 
@@ -66,7 +68,7 @@ module.exports = React.createClass({
             return (
                 <div>
                     <p className="well">No posts.</p>
-                    <PostForm />
+                    <PostForm page={this.props.page} />
                 </div>
             );
         }
@@ -81,7 +83,7 @@ module.exports = React.createClass({
                         </div> )
                 }.bind(this))}
 
-                <PostForm page={this.props.page} />
+                <PostForm page={this.props.page} context={this.props.context} />
             </div> );
     }
 });

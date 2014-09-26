@@ -2,19 +2,27 @@ var _ = require('underscore');
 var revalidator = require('revalidator');
 
 var FormValidationMixin = {
-    valid: true,
-    errors: [],
-    dirty: [],
 
-    componentWillReceiveProps: function (nextProps) {
-        this.valid = true;
-        this.errors = [];
-        this.dirty = [];
+    componentWillReceiveProps: function () {
+        this.reset();
+    },
+
+    componentWillMount: function () {
+        this.reset();
     },
 
     componentWillUpdate: function (nextProps, nextState) {
         this.updateDirty(nextState);
         this.validate(nextState);
+    },
+
+    /**
+     * Reset form state.
+     */
+    reset: function () {
+        this.valid = false;
+        this.errors = [];
+        this.dirty = [];
     },
 
     /**
@@ -44,7 +52,9 @@ var FormValidationMixin = {
     },
 
     /**
-     * Return object of connecting functions for given input
+     * Return object of connecting functions for given input. The connecting
+     * functions will link input to the form and will affect input's visual
+     * appearance depending on the validation state.
      * @param {string} name of input
      * @returns {{linkState: (*|ReactLink), bsStyle: Function, help: Function}}
      */
@@ -54,6 +64,10 @@ var FormValidationMixin = {
         return {
             valueLink: form.linkState(name),
 
+            /**
+             * Bootstrap style class depending on validation state.
+             * @returns {string}  (error|success|null)
+             */
             bsStyle: function () {
                 if (!form.isDirty(name)) {
                     return null;
@@ -62,6 +76,10 @@ var FormValidationMixin = {
                 return error ? 'error' : 'success';
             },
 
+            /**
+             * Validation message as Bootstrap's help text.
+             * @returns {string} message or null
+             */
             help: function () {
                 if (!form.isDirty(name)) {
                     return null;
