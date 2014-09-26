@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 var React = require('react');
 var Bootstrap = require('react-bootstrap');
+var InputH = require('./forms/InputH.jsx');
 
-var Input = Bootstrap.Input;
 
 module.exports = React.createClass({
     mixins: [React.addons.LinkedStateMixin],
@@ -24,10 +24,10 @@ module.exports = React.createClass({
 
         return (
             <form onSubmit={this.handleSubmit} className="form-horizontal">
-                <Input type="text" label="Post title" valueLink={this.linkState('title')} labelClassName="col-xs-2" wrapperClassName="col-xs-10" />
-                <Input type="text" label="Your name" valueLink={this.linkState('author')} labelClassName="col-xs-2" wrapperClassName="col-xs-10" />
-                <Input type="textarea" label="Text" valueLink={this.linkState('body')} labelClassName="col-xs-2" wrapperClassName="col-xs-10" />
-                <Input type="submit" value="Submit post" bsStyle="primary" wrapperClassName="col-xs-offset-2 col-xs-10" />
+                <InputH type="text" label="Post title" valueLink={this.linkState('title')}  />
+                <InputH type="text" label="Your name" valueLink={this.linkState('author')}  />
+                <InputH type="textarea" label="Text" valueLink={this.linkState('body')} />
+                <InputH type="submit" value="Submit post" bsStyle="primary" />
             </form>
         );
     }
