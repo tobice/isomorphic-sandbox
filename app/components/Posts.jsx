@@ -75,13 +75,15 @@ module.exports = React.createClass({
 
         return (
             <div classNames="posts">
-                {posts.map(function(post) {
-                    return (
-                        <div className="post well" key={post.id}>
-                            <h4>{post.title} <small> (by {post.author})</small> </h4>
-                            <p>{post.body}</p>
-                        </div> )
-                }.bind(this))}
+                <ReactCSSTransitionGroup transitionName="fade">
+                    {posts.map(function(post) {
+                        return (
+                            <div className="post well" key={post.id}>
+                                <h4>{post.title} <small> (by {post.author})</small> </h4>
+                                <p>{post.body}</p>
+                            </div> )
+                    }.bind(this))}
+                </ReactCSSTransitionGroup>
 
                 <PostForm page={this.props.page} context={this.props.context} />
             </div> );
