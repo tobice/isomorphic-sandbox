@@ -9,14 +9,14 @@ var _posts = [{
     author: "spike",
     body: "It's really not that hard!",
     page: "strategy",
-    created_at: "2013-11-05T13:56:15.034Z",
+    created_at: "2013-11-05T13:56:15.034Z"
 }, {
     id: ++postId,
     title: "Why JavaScript is eating the world.",
     author: "spike",
     body: "It's the lingua franca of the web.",
     page: "about",
-    created_at: "2013-11-04T17:23:01.329Z",
+    created_at: "2013-11-04T17:23:01.329Z"
 }];
 
 module.exports = {
@@ -53,14 +53,13 @@ module.exports = {
     create: function (req, resource, params, body, config, callback) {
         _posts.push({
             id: ++postId,
-            title: params.title,
-            author: params.author,
-            body: params.body,
-            created_at: params.timestamp
+            title: body.title,
+            author: body.author,
+            body: body.body,
+            page: body.page,
+            created_at: "2013-11-04T17:23:01.329Z"
         });
-        setTimeout(function () {
-            callback(null, _posts);
-        }, 10);
+        this.read(req, resource, {page: body.page}, config, callback);
     }
     //update: function(resource, params, body, config, callback) {},
     //del: function(resource, params, config, callback) {}

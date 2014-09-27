@@ -5,10 +5,12 @@ var InputH = require('./forms/InputH.jsx');
 var Input = require('./forms/Input.jsx');
 var FormValidationMixin = require('./forms/FormValidationMixin.js');
 var postScheme = require('../schemes/post');
+var postActions = require('../actions/postActions');
 
 module.exports = React.createClass({
     mixins: [React.addons.LinkedStateMixin, FormValidationMixin],
     propTypes: {
+        context: React.PropTypes.object.isRequired,
         page: React.PropTypes.string.isRequired
     },
 
@@ -26,6 +28,11 @@ module.exports = React.createClass({
     },
 
     handleSubmit: function () {
+        this.props.context.executeAction(postActions.create, this.state, function (err) {
+            this.setState(this.getInitialState());
+            this.reset(); // reset validation variables
+            this.forceUpdate();
+        }.bind(this));
         return false;
     },
 
@@ -35,7 +42,7 @@ module.exports = React.createClass({
                 <InputH type="text" label="Post title" connect={this.connect('title')} />
                 <InputH type="text" label="Your name" connect={this.connect('author')} />
                 <InputH type="textarea" label="Text" connect={this.connect('body')} />
-                <InputH type="submit" value="Submit post" bsStyle="primary" />
+                <InputH type="submit" value="Submit post" bsStyle="primary" disabled={!this.valid} />
             </form>
         );
     }

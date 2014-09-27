@@ -2,7 +2,7 @@
 var React = require('react');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var ReactFluxAsync = require('../lib/ReactFluxAsync.js');
-var actionReadPosts = require('../actions/readPosts');
+var postActions = require('../actions/postActions.js');
 
 var NavLink = require('flux-router-component').NavLink;
 var PostForm = require('./PostForm.jsx');
@@ -22,7 +22,7 @@ module.exports = React.createClass({
 
     initStoresAsync: function (done) {
         if (!this.PostStore.isLoaded()) {
-            this.context.executeAction(actionReadPosts, {page: this.props.page}, done);
+            this.context.executeAction(postActions.read, this.props.page, done);
         } else {
             done();
         }
@@ -36,7 +36,7 @@ module.exports = React.createClass({
     },
 
     componentWillReceiveProps: function (nextProps) {
-        nextProps.context.executeAction(actionReadPosts, {page: nextProps.page});
+        nextProps.context.executeAction(postActions.read, nextProps.page);
     },
 
     componentDidMount: function () {
@@ -68,7 +68,7 @@ module.exports = React.createClass({
             return (
                 <div>
                     <p className="well">No posts.</p>
-                    <PostForm page={this.props.page} />
+                    <PostForm page={this.props.page} context={this.props.context} />
                 </div>
             );
         }
