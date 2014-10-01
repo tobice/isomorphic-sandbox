@@ -3,6 +3,7 @@ var React = require('react');
 var Bootstrap = require('react-bootstrap');
 var InputH = require('./forms/InputH.jsx');
 var Input = require('./forms/Input.jsx');
+var If = require('./If.js');
 var Alert = Bootstrap.Alert;
 var FormValidationMixin = require('./forms/FormValidationMixin.js');
 var PostStore = require('../stores/PostStore');
@@ -44,18 +45,13 @@ module.exports = React.createClass({
         var status = this.props.context.getStore('PostStore').getAddingStatus();
         var disabled = status == PostStore.IN_PROGRESS;
 
-        var message = <span />;
-        if (status == PostStore.ERROR) {
-            message = (
-                <Alert bsStyle="danger">
-                    Unfortunately, the post could not be published.
-                </Alert>
-            );
-        }
-
         return (
             <form onSubmit={this.handleSubmit} className="form-horizontal">
-                {message}
+                <If test={status == PostStore.ERROR}>
+                    <Alert bsStyle="danger">
+                        Unfortunately, the post could not be published.
+                    </Alert>
+                </If>
                 <InputH type="text" label="Post title" connect={this.connect('title')} disabled={disabled} />
                 <InputH type="text" label="Your name" connect={this.connect('author')} disabled={disabled} />
                 <InputH type="textarea" label="Text" connect={this.connect('body')} disabled={disabled} />
