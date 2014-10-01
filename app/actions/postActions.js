@@ -1,3 +1,5 @@
+var PostStore = require('../stores/PostStore');
+
 var postActions = {
     // Universal config
     config: {},
@@ -20,9 +22,15 @@ var postActions = {
      * @param {callback} done
      */
     create: function (context, newPost, done) {
+        context.dispatch('SET_POST_ADDING_STATUS', PostStore.IN_PROGRESS);
         context.fetcher.create('post', {}, newPost, this.config, function (err, posts) {
+            if (err) {
+                context.dispatch('SET_POST_ADDING_STATUS', PostStore.ERROR);
+                return done(err);
+            }
+            context.dispatch('SET_POST_ADDING_STATUS', PostStore.SUCCESS);
             context.dispatch('RECEIVE_POSTS', posts);
-            done();
+            return done();
         });
     }
 };

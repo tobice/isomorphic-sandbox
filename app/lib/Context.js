@@ -18,10 +18,6 @@ Context.prototype.getComponentContext = function () {
     return {
         executeAction: function (actionController, payload, done) {
             actionController(self.actionContext, payload, function (err, data) {
-                if (err) {
-                    console.error(err);
-                }
-
                 if (_.isFunction(done)) {
                     done(err, data);
                 }

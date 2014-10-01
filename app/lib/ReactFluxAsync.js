@@ -3,7 +3,7 @@ var ReactAsync = require('react-async');
 
 var Mixin = ReactAsync.Mixin;
 
-// Simple detection whether the detection is for client side.
+// Simple detection whether the module is for client side.
 if (!ReactAsync.renderComponentToStringWithAsyncState) {
 
     Mixin.getInitialState = function () {

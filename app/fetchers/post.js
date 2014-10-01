@@ -1,5 +1,7 @@
 'use strict';
 
+var revalidator = require('revalidator');
+var postScheme = require('../schemes/post');
 var _ = require('underscore');
 
 var postId = 0;
@@ -50,17 +52,27 @@ module.exports = {
         }, 10);
     },
 
-    create: function (req, resource, params, body, config, callback) {
-        _posts.push({
-            id: ++postId,
-            title: body.title,
-            author: body.author,
-            body: body.body,
-            page: body.page,
-            created_at: "2013-11-04T17:23:01.329Z"
-        });
-        this.read(req, resource, {page: body.page}, config, callback);
+    create: function (req, resource, params, post, config, callback) {
+        var validation = revalidator.validate(post, postScheme);
+
+        if (validation.valid) {
+            _posts.push({
+                id: ++postId,
+                title: post.title,
+                author: post.author,
+                body: post.body,
+                page: post.page,
+                created_at: "2013-11-04T17:23:01.329Z"
+            });
+            setTimeout(function () {
+                this.read(req, resource, {page: post.page}, config, callback);
+            }.bind(this), 500);
+        }
+        else {
+            callback(new Error());
+        }
     }
+
     //update: function(resource, params, body, config, callback) {},
     //del: function(resource, params, config, callback) {}
 

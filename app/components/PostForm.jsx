@@ -3,7 +3,9 @@ var React = require('react');
 var Bootstrap = require('react-bootstrap');
 var InputH = require('./forms/InputH.jsx');
 var Input = require('./forms/Input.jsx');
+var Alert = Bootstrap.Alert;
 var FormValidationMixin = require('./forms/FormValidationMixin.js');
+var PostStore = require('../stores/PostStore');
 var postScheme = require('../schemes/post');
 var postActions = require('../actions/postActions');
 
@@ -29,20 +31,35 @@ module.exports = React.createClass({
 
     handleSubmit: function () {
         this.props.context.executeAction(postActions.create, this.state, function (err) {
-            this.setState(this.getInitialState());
-            this.reset(); // reset validation variables
+            if (!err) {
+                this.setState(this.getInitialState());
+                this.reset(); // reset validation variables
+            }
             this.forceUpdate();
         }.bind(this));
         return false;
     },
 
     render: function () {
+        var status = this.props.context.getStore('PostStore').getAddingStatus();
+        var disabled = status == PostStore.IN_PROGRESS;
+
+        var message = <span />;
+        if (status == PostStore.ERROR) {
+            message = (
+                <Alert bsStyle="danger">
+                    Unfortunately, the post could not be published.
+                </Alert>
+            );
+        }
+
         return (
             <form onSubmit={this.handleSubmit} className="form-horizontal">
-                <InputH type="text" label="Post title" connect={this.connect('title')} />
-                <InputH type="text" label="Your name" connect={this.connect('author')} />
-                <InputH type="textarea" label="Text" connect={this.connect('body')} />
-                <InputH type="submit" value="Submit post" bsStyle="primary" disabled={!this.valid} />
+                {message}
+                <InputH type="text" label="Post title" connect={this.connect('title')} disabled={disabled} />
+                <InputH type="text" label="Your name" connect={this.connect('author')} disabled={disabled} />
+                <InputH type="textarea" label="Text" connect={this.connect('body')} disabled={disabled} />
+                <InputH type="submit" value="Submit post" bsStyle="primary" disabled={disabled || !this.valid} />
             </form>
         );
     }
