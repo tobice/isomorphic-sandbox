@@ -6,6 +6,7 @@ require('node-jsx').install({extension: '.jsx'});
 var http = require('http');
 var express = require('express');
 var expressState = require('express-state');
+var compression = require('compression');
 var bodyParser = require('body-parser');
 var debug = require('debug')('Example');
 var React = require('react');
@@ -20,8 +21,8 @@ app.set('state namespace', 'App');
 app.set('views', __dirname + '/app'); // only for layout
 app.set('view engine', 'jade');
 
+app.use(compression());
 app.use(express.static(__dirname + '/public'));
-
 app.use(bodyParser.json());
 
 Fetcher.registerFetcher(require('./app/fetchers/post'));
