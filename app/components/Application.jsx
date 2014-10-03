@@ -23,6 +23,9 @@ var Application = React.createClass({
         self._changeEventListener = function () {
             var state = self.store.getState();
             self.setState(state);
+
+            // little jQuery hack
+            jQuery('.navbar-collapse').collapse('hide');
         };
         self.store.on('change', self._changeEventListener);
     },
@@ -39,7 +42,9 @@ var Application = React.createClass({
                 <Navigation context={this.props.context} />
                 <div className="container">
                     <div className="row">
-                        {views[this.state.view]({context: this.props.context, data: this.state.data})}
+                        <div className="col-lg-12">
+                            {views[this.state.view]({context: this.props.context, data: this.state.data})}
+                        </div>
                     </div>
                 </div>
             </div>

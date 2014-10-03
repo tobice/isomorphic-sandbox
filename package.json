@@ -35,11 +35,12 @@
         "routr": "^0.0.2",
         "flux-router-component": "^0.2.0",
         "bootstrap": "~3.2.0",
+        "jquery": "~2.1.1",
         "font-awesome": "~4.2.0",
         "bootswatch": "~3.2.0",
         "lorem-ipsum": "~1.0.1",
         "revalidator": "~0.2.0",
-        
+
         "grunt": "~0.4.5",
         "grunt-cli": "0.1.13",
         "browserify": "~5.12.0",
