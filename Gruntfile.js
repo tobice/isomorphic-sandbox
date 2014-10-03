@@ -4,28 +4,50 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         browserify: {
-            main: {
+            options: {
+                aliasMappings: [{
+                    cwd: 'app/views',
+                        src: ['**/*.jsx'],
+                        dest: 'app/views'
+                }]
+            },
+            debug: {
                 options: {
                     debug: true,
-                    transform: ['reactify'],
-                    aliasMappings: [
-                        {
-                            cwd: 'app/views',
-                            src: ['**/*.jsx'],
-                            dest: 'app/views'
-                        }
-                    ],
+                    transform: ['reactify']
                 },
                 files: {
-                    'public/scripts.js': 'client.js',
-                },
+                    'public/scripts.js': 'client.js'
+                }
             },
+            build: {
+                options: {
+                    debug: false,
+                    transform: [
+                        'reactify',
+                        ['uglifyify', {
+                            global: true,
+                            ignore: ['**/app/controller.js']
+                        }]]
+                },
+                files: {
+                    'public/scripts.js': 'client.js'
+                }
+            }
         },
 
         less: {
-            development: {
+            options: {
+                paths: ['node_modules', 'node_modules/bootstrap/less']
+            },
+            debug: {
+                files: {
+                    'public/styles.css': 'assets/stylesheets/index.less'
+                }
+            },
+            build: {
                 options: {
-                    paths: ['node_modules', 'node_modules/bootstrap/less']
+                    cleancss: true
                 },
                 files: {
                     'public/styles.css': 'assets/stylesheets/index.less'
@@ -34,7 +56,7 @@ module.exports = function (grunt) {
         },
 
         copy: {
-            main: {
+            all: {
                 files: [{
                     expand: true,
                     cwd: 'node_modules/font-awesome/fonts/',
@@ -59,14 +81,14 @@ module.exports = function (grunt) {
         watch: {
             app: {
                 files: ['app/**/*', 'client.js'],
-                tasks: ['browserify'],
+                tasks: ['browserify:debug'],
                 options: {
                     interrupt: true
                 }
             },
             styles: {
                 files: 'assets/stylesheets/**/*',
-                tasks: ['less'],
+                tasks: ['less:debug'],
                 options: {
                     interrupt: true
                 }
@@ -91,7 +113,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-concurrent');
 
-    grunt.registerTask('compile', ['browserify', 'less', 'copy']);
-    grunt.registerTask('default', ['compile']);
-    grunt.registerTask('server', ['compile', 'concurrent']);
+    grunt.registerTask('server', ['browserify:debug', 'less:debug', 'copy', 'concurrent']);
+    grunt.registerTask('build', ['browserify:build', 'less:build', 'copy']);
 };
