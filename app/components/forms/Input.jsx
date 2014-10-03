@@ -1,9 +1,15 @@
 /** @jsx React.DOM */
 var React = require('react');
-var Bootstrap = require('react-bootstrap');
-var Input = Bootstrap.Input;
+var OriginalInput = require('../../lib/Input.jsx');
 
-var InputH = React.createClass({
+/**
+ * Little input extension that allows input to be more easily connected to a
+ * form component with FormValidationMixin.
+ *
+ * @property {object} connect object that encapsulates valueLink, bsStyle
+ *  (css class determining input style) and help (help text).
+ */
+var Input = React.createClass({
     propTypes: {
         connect: React.PropTypes.object
     },
@@ -18,8 +24,8 @@ var InputH = React.createClass({
                 help: connect.help()
             };
         }
-        return this.transferPropsTo(Input(props));
+        return this.transferPropsTo(OriginalInput(props));
     }
 });
 
-module.exports = InputH;
+module.exports = Input;

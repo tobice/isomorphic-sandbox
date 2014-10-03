@@ -1,6 +1,5 @@
 /** @jsx React.DOM */
 var React = require('react');
-var Bootstrap = require('react-bootstrap');
 var Input = require('./Input.jsx');
 
 /**

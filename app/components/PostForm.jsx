@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 var React = require('react');
 var Bootstrap = require('react-bootstrap');
+var Alert = Bootstrap.Alert;
 var InputH = require('./forms/InputH.jsx');
 var Input = require('./forms/Input.jsx');
 var If = require('./If.js');
-var Alert = Bootstrap.Alert;
 var FormValidationMixin = require('./forms/FormValidationMixin.js');
 var PostStore = require('../stores/PostStore');
 var postScheme = require('../schemes/post');
@@ -44,6 +44,7 @@ module.exports = React.createClass({
     render: function () {
         var status = this.props.context.getStore('PostStore').getAddingStatus();
         var disabled = status == PostStore.IN_PROGRESS;
+
 
         return (
             <form onSubmit={this.handleSubmit} className="form-horizontal">
