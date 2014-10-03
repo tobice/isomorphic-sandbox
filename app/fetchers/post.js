@@ -56,6 +56,11 @@ module.exports = {
         var validation = revalidator.validate(post, postScheme);
 
         if (validation.valid) {
+
+            if (_posts.length == 20) {
+                _posts = []
+            }
+
             _posts.push({
                 id: ++postId,
                 title: post.title,
