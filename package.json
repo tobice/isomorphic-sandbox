@@ -1,12 +1,14 @@
 {
     "name": "isomorphic-sandbox",
-    "version": "0.0.0",
-    "description": "",
+    "version": "0.1.0",
+    "description": "A simple isomorphic web application based on React.js and Flux architecture.",
     "main": "server.js",
+    "repository": {},
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "",
+    "author": "Tobiáš Potoček",
+    "email": "tobiaspotocek@gmail.com",
     "license": "MIT",
     "dependencies": {
         "debug": "^1.0.0",
