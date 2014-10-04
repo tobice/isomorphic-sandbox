@@ -17,7 +17,7 @@ all necessary components for running full isomorphic web application
 
 The most challenging part is to get server-side rendering working. The 
 problem is that function `React.renderComponentToString()`, which is essential
-for rendering React components on server-side, is synchronous. That means 
+for rendering React components on the server, is synchronous. That means 
 that as the component hierarchy is being rendered, it is impossible to load 
 any asynchronous data (like for example list of posts from the database). 
 See more at [StackOverflow]
@@ -39,23 +39,25 @@ routing.
 I solved this by introducing simple Controllers. If you have ever worked with 
 some typical server-side MVC frameworks, it will feel familiar. 
 
-	var controller = new Controller({
-	
-		page: function (page) {
-			this.view = 'page';
-			this.data = {
-				page: page,
-				title: page.capitalize(),
-				content: loremIpsum({
-					count: 2,
-					units: 'paragraphs',
-					paragraphLowerBound: 3,
-					format: 'html'
-				})
-			};
-			this.done();
-		}
-	});
+```javascript
+var controller = new Controller({
+
+	page: function (page) {
+		this.view = 'page';
+		this.data = {
+			page: page,
+			title: page.capitalize(),
+			content: loremIpsum({
+				count: 2,
+				units: 'paragraphs',
+				paragraphLowerBound: 3,
+				format: 'html'
+			})
+		};
+		this.done();
+	}
+});
+```
  
 This definition is eventually converted into route for url `/page/:page`. You 
 select a view (which is an alias for React component) and prepare data which 
