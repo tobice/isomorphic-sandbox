@@ -1,3 +1,6 @@
+/**
+ * Revalidator scheme for a Post.
+ */
 var postScheme = {
     properties: {
         title: {

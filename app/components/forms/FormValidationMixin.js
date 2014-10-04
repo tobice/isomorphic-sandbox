@@ -1,6 +1,13 @@
 var _ = require('underscore');
 var revalidator = require('revalidator');
 
+/**
+ * Component mixin that adds simple form validation using revalidator plugin.
+ *
+ * @property {boolean} valid - Is the data in the form valid
+ * @property {Object[]} errors - List of errors in the form
+ * @property {string[]} dirty - List of dirty form fields
+ */
 var FormValidationMixin = {
 
     componentWillReceiveProps: function () {

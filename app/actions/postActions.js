@@ -1,12 +1,12 @@
 var PostStore = require('../stores/PostStore');
 
 var postActions = {
-    // Universal config
+    // Universal config for fetchr
     config: {},
 
     /**
      * @param {object} context
-     * @param {number} page to load posts for
+     * @param {string} page to load posts for
      * @param {callback} done
      */
     read: function (context, page, done) {

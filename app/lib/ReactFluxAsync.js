@@ -3,6 +3,10 @@ var ReactAsync = require('react-async');
 
 var Mixin = ReactAsync.Mixin;
 
+/**
+ * ReactAsync mixin modified to support Flux stores.
+ */
+
 // Simple detection whether the module is for client side.
 if (!ReactAsync.renderComponentToStringWithAsyncState) {
 

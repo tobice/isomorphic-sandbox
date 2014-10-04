@@ -1,5 +1,11 @@
 var _ = require('underscore');
 
+
+/**
+ * Simple MVC controller that can be converted into routr-compatible routes.
+ * @param {Object.<string, callback>} actions - Controller actions
+ * @constructor
+ */
 function Controller(actions) {
     this.actions = actions;
 }

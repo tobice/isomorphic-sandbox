@@ -1,11 +1,13 @@
 /** @jsx React.DOM */
 var React = require('react');
+
 var Bootstrap = require('react-bootstrap');
 var Alert = Bootstrap.Alert;
 var InputH = require('./forms/InputH.jsx');
-var Input = require('./forms/Input.jsx');
+
 var If = require('./If.js');
 var FormValidationMixin = require('./forms/FormValidationMixin.js');
+
 var PostStore = require('../stores/PostStore');
 var postScheme = require('../schemes/post');
 var postActions = require('../actions/postActions');

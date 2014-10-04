@@ -21,8 +21,10 @@ app.set('state namespace', 'App');
 app.set('views', __dirname + '/app'); // only for layout
 app.set('view engine', 'jade');
 
+// Enable GZip compression and serving static files
 app.use(compression());
 app.use(express.static(__dirname + '/public'));
+
 app.use(bodyParser.json());
 
 Fetcher.registerFetcher(require('./app/fetchers/post'));
