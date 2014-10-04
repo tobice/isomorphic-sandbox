@@ -21,12 +21,12 @@ var InputH = React.createClass({
         if (this.props.type === "submit") {
             props = {
                 labelClassName: "",
-                wrapperClassName: "col-xs-offset-" + labelWidth + " col-xs-" + wrapperWidth
+                wrapperClassName: "col-md-offset-" + labelWidth + " col-md-" + wrapperWidth
             };
         } else {
             props = {
-                labelClassName: "col-xs-" + labelWidth,
-                wrapperClassName: "col-xs-" + wrapperWidth
+                labelClassName: "col-md-" + labelWidth,
+                wrapperClassName: "col-md-" + wrapperWidth
             }
         }
         return this.transferPropsTo(Input(props));
